@@ -2,8 +2,9 @@ import {View, Text, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Dashboard from '../screens/Dashboard';
-import Visited from '../screens/Visited';
 import Help from '../screens/Help';
+import Pending from '../screens/Pending';
+import Profile from '../screens/Profile';
 const Bottom = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
@@ -28,10 +29,10 @@ const BottomNavigator = () => {
         }}
       />
       <Bottom.Screen
-        name="Visited"
-        component={Visited}
+        name="Pending"
+        component={Pending}
         options={{
-          headerShown: true,
+          headerShown: false,
           tabBarIcon: tabInfo => {
             return (
               <Image
@@ -50,11 +51,30 @@ const BottomNavigator = () => {
         name="Help"
         component={Help}
         options={{
-          headerShown: true,
+          headerShown: false,
           tabBarIcon: tabInfo => {
             return (
               <Image
                 source={require('../Images/ambulance.png')}
+                style={{
+                  width: 40,
+                  height: 40,
+                  tinColor: tabInfo.focuesd ? 'purple' : 'black',
+                }}
+              />
+            );
+          },
+        }}
+      />
+      <Bottom.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarIcon: tabInfo => {
+            return (
+              <Image
+                source={require('../Images/doctor.png')}
                 style={{
                   width: 40,
                   height: 40,

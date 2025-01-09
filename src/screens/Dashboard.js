@@ -13,6 +13,7 @@ import React from 'react';
 import CommonBtn from '../components/CommonBtn';
 import Header from '../components/Header';
 import LinearGradient from 'react-native-linear-gradient';
+import AutoSlider from '../components/AutoSlider';
 
 const Dashboard = ({navigation}) => {
   return (
@@ -24,27 +25,35 @@ const Dashboard = ({navigation}) => {
             source={require('../Images/banner.jpg')}
             style={styles.banner}
           />
+          {/* <View style={{flex: 1}}>
+            <AutoSlider />
+          </View> */}
+
           <Text style={styles.heading}>Select Category</Text>
           <View style={{marginTop: 20}}>
             <FlatList
-              data={[1, 1, 1, 1, 1, 1, 1]}
+              data={[1, 1, 1, 1, 1, 1, 1]} // Sample data
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({item, index}) => {
                 return (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('DoctorList', {
+                        categoryName: 'category' + index,
+                      });
+                    }}>
                     <LinearGradient
                       colors={['#009FFD', '#2A2A72']}
                       style={styles.linearGradient}>
-                      <Text style={styles.catName}>
-                        {'Category ' + index + 1}
-                      </Text>
+                      <Text style={styles.catName}>{'Category ' + index}</Text>
                     </LinearGradient>
                   </TouchableOpacity>
                 );
               }}
             />
           </View>
+
           <Text style={styles.heading}>Top Rated Doctors</Text>
           <View style={{marginTop: 20, alignItems: 'center'}}>
             <FlatList

@@ -7,6 +7,11 @@ import Splash from './screens/Splash';
 import RootNavigation from './navigation/RootNavigation';
 // import Dashboard from './screens/Dashboard';
 import BookAppointment from './screens/BookAppointment';
+import Success from './screens/Success';
+import Dashboard from './screens/Dashboard';
+import Help from './screens/Help';
+import DoctorList from './screens/DoctorList';
+import DrProfile from './screens/DrProfile';
 const Stack = createStackNavigator();
 const Appnavigator = () => {
   return (
@@ -22,15 +27,35 @@ const Appnavigator = () => {
           component={RootNavigation}
           options={{headerShown: false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Dashboard"
           component={Dashboard}
           options={{headerShown: false}}
-        /> */}
+        />
         <Stack.Screen
           name="BookAppointment"
           component={BookAppointment}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Success"
+          component={Success}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Help"
+          component={Help}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DoctorList"
+          component={DoctorList}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DrProfile"
+          component={DrProfile}
+          options={{headerShown: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>
