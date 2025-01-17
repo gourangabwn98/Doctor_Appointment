@@ -84,7 +84,7 @@ const ViewAppointment = ({route, navigation}) => {
         {/* Book Again Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Success')}>
+          onPress={() => navigation.navigate('BookAppointment')}>
           <Text style={styles.buttonText}>Book Again</Text>
         </TouchableOpacity>
       </View>

@@ -21,8 +21,14 @@ import {colors} from '../constants/colors';
 const Login = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [mobile, setMobile] = useState('');
+  const [name, setName] = useState(''); // Added Name State
 
   const handleGetOtp = () => {
+    if (!name.trim() || !mobile.trim()) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -42,11 +48,21 @@ const Login = ({navigation}) => {
             <Image source={LoginImage} style={styles.logo} />
           </View>
 
+          {/* Name Input */}
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Enter Name"
+              onChangeText={text => setName(text)} // Updating Name
+              value={name}
+              style={styles.input}
+            />
+          </View>
+
           {/* Mobile Number Input */}
           <View style={styles.inputContainer}>
             <TextInput
               placeholder="Enter Mobile Number"
-              onChange={text => setMobile(text)}
+              onChangeText={text => setMobile(text)}
               value={mobile}
               maxLength={10}
               style={styles.input}
@@ -143,7 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     backgroundColor: '#F8F8FF',
-    fontSize: 20,
+    fontSize: 16,
     color: 'black',
   },
   btn: {

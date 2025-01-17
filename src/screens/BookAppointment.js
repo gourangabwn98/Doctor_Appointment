@@ -52,146 +52,145 @@ const BookAppointment = ({navigation}) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.container}>
-        <Header
-          icon={require('../Images/back.png')}
-          title={'Book Appointment'}
-        />
-        <Image source={doctorDetails.image} style={styles.docImg} />
-        <Text style={styles.name}>{doctorDetails.name}</Text>
-        <Text style={styles.age}>{doctorDetails.age}</Text>
-        <Text style={styles.spcl}>{doctorDetails.specialization}</Text>
-        <Text style={styles.heading}>Select Date</Text>
-        <View style={{marginTop: 20}}>
+    <View style={{flex: 1}}>
+      <Header icon={require('../Images/back.png')} title={'Book Appointment'} />
+      <ScrollView style={styles.container}>
+        <View style={styles.container}>
+          <Image source={doctorDetails.image} style={styles.docImg} />
+          <Text style={styles.name}>{doctorDetails.name}</Text>
+          <Text style={styles.age}>{doctorDetails.age}</Text>
+          <Text style={styles.spcl}>{doctorDetails.specialization}</Text>
+          <Text style={styles.heading}>Select Date</Text>
+          <View style={{marginTop: 20}}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={days}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item, index}) => {
+                return (
+                  <TouchableOpacity
+                    style={[
+                      styles.dateBox,
+                      {
+                        backgroundColor:
+                          selectedDay === index ? '#4A90E2' : 'white',
+                        borderColor: selectedDay === index ? 'blue' : 'gray',
+                      },
+                    ]}
+                    onPress={() => {
+                      if (item.day >= new Date().getDate()) {
+                        setSelectedDay(index);
+                      }
+                    }}>
+                    <Text
+                      style={{color: selectedDay === index ? 'white' : 'blue'}}>
+                      {item.day}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+          <Text style={styles.heading}>Available Slots</Text>
           <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={days}
+            numColumns={2}
+            data={slots}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item, index}) => {
               return (
                 <TouchableOpacity
                   style={[
-                    styles.dateBox,
+                    styles.timeSlot,
                     {
                       backgroundColor:
-                        selectedDay === index ? '#4A90E2' : 'white',
-                      borderColor: selectedDay === index ? 'blue' : 'gray',
+                        selectedSlot === index ? '#4A90E2' : 'white',
+                      borderColor: index === selectedSlot ? 'blue' : 'gray',
                     },
                   ]}
-                  onPress={() => {
-                    if (item.day >= new Date().getDate()) {
-                      setSelectedDay(index);
-                    }
-                  }}>
+                  onPress={() => setSelectedSlot(index)}>
                   <Text
-                    style={{color: selectedDay === index ? 'white' : 'blue'}}>
-                    {item.day}
+                    style={{color: index === selectedSlot ? 'white' : 'gray'}}>
+                    {item.sloT}
                   </Text>
                 </TouchableOpacity>
               );
             }}
           />
-        </View>
-        <Text style={styles.heading}>Available Slots</Text>
-        <FlatList
-          numColumns={2}
-          data={slots}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item, index}) => {
-            return (
+          <Text style={styles.heading}>Patient Name</Text>
+          <TextInput
+            style={styles.nameInput}
+            placeholder={'Enter Name'}
+            value={patientName}
+            onChangeText={setPatientName}
+          />
+          <Text style={styles.heading}> Age</Text>
+          <TextInput
+            style={styles.ageInput}
+            keyboardType="numeric"
+            placeholder={'Enter Age'}
+            value={patientAge}
+            onChangeText={setPatientAge}
+          />
+          <Text style={styles.heading}>Select Gender</Text>
+          <View style={styles.genderView}>
+            <View>
               <TouchableOpacity
                 style={[
-                  styles.timeSlot,
+                  styles.gender,
+                  {borderColor: selectedGender === 0 ? 'blue' : 'gray'},
+                ]}
+                onPress={() => setSelectedGender(0)}>
+                <Image
+                  source={require('../Images/male.png')}
+                  style={{width: 24, height: 24}}
+                />
+              </TouchableOpacity>
+              <Text style={styles.genderText}>Male</Text>
+            </View>
+            <View>
+              <TouchableOpacity
+                style={[
+                  styles.gender,
                   {
                     backgroundColor:
-                      selectedSlot === index ? '#4A90E2' : 'white',
-                    borderColor: index === selectedSlot ? 'blue' : 'gray',
+                      selectedGender === 1 || 0 ? '#4A90E2' : 'white',
+
+                    borderColor: selectedGender === 1 ? 'blue' : 'gray',
                   },
                 ]}
-                onPress={() => setSelectedSlot(index)}>
-                <Text
-                  style={{color: index === selectedSlot ? 'white' : 'gray'}}>
-                  {item.sloT}
-                </Text>
+                onPress={() => setSelectedGender(1)}>
+                <Image
+                  source={require('../Images/female.png')}
+                  style={{width: 24, height: 24}}
+                />
               </TouchableOpacity>
-            );
-          }}
-        />
-        <Text style={styles.heading}>Patient Name</Text>
-        <TextInput
-          style={styles.nameInput}
-          placeholder={'Enter Name'}
-          value={patientName}
-          onChangeText={setPatientName}
-        />
-        <Text style={styles.heading}> Age</Text>
-        <TextInput
-          style={styles.ageInput}
-          keyboardType="numeric"
-          placeholder={'Enter Age'}
-          value={patientAge}
-          onChangeText={setPatientAge}
-        />
-        <Text style={styles.heading}>Select Gender</Text>
-        <View style={styles.genderView}>
-          <View>
-            <TouchableOpacity
-              style={[
-                styles.gender,
-                {borderColor: selectedGender === 0 ? 'blue' : 'gray'},
-              ]}
-              onPress={() => setSelectedGender(0)}>
-              <Image
-                source={require('../Images/male.png')}
-                style={{width: 24, height: 24}}
-              />
-            </TouchableOpacity>
-            <Text style={styles.genderText}>Male</Text>
+              <Text style={styles.genderText}>Female</Text>
+            </View>
           </View>
-          <View>
-            <TouchableOpacity
-              style={[
-                styles.gender,
-                {
-                  backgroundColor:
-                    selectedGender === 1 || 0 ? '#4A90E2' : 'white',
 
-                  borderColor: selectedGender === 1 ? 'blue' : 'gray',
-                },
-              ]}
-              onPress={() => setSelectedGender(1)}>
-              <Image
-                source={require('../Images/female.png')}
-                style={{width: 24, height: 24}}
-              />
-            </TouchableOpacity>
-            <Text style={styles.genderText}>Female</Text>
+          <View style={styles.btnView}>
+            <CommonBtn
+              w={300}
+              h={45}
+              txt={'Book Now'}
+              onClick={handleBookNow}
+              status={isFormValid()}
+            />
           </View>
         </View>
 
-        <View style={styles.btnView}>
-          <CommonBtn
-            w={300}
-            h={45}
-            txt={'Book Now'}
-            onClick={handleBookNow}
-            status={isFormValid()}
-          />
-        </View>
-      </View>
-
-      {/* Activity Indicator Modal */}
-      <Modal
-        isVisible={isLoading}
-        style={{justifyContent: 'center', alignItems: 'center'}}
-        backdropOpacity={0.5}
-        animationIn="fadeIn"
-        animationOut="fadeOut">
-        <ActivityIndicator size="large" color="blue" />
-      </Modal>
-    </ScrollView>
+        {/* Activity Indicator Modal */}
+        <Modal
+          isVisible={isLoading}
+          style={{justifyContent: 'center', alignItems: 'center'}}
+          backdropOpacity={0.5}
+          animationIn="fadeIn"
+          animationOut="fadeOut">
+          <ActivityIndicator size="large" color="blue" />
+        </Modal>
+      </ScrollView>
+    </View>
   );
 };
 

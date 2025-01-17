@@ -18,11 +18,22 @@ import SearchBar from '../components/SearchBar';
 
 const Dashboard = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
+  const currentHour = new Date().getHours(); // To determine time of the day
+
+  const greeting = currentHour >= 18 ? 'Good Evening' : 'Good Morning'; // Conditional greeting based on time
+
   return (
     <View style={styles.container}>
+      <Header title={'DoctorApp'} icon={require('../Images/logo.png')} />
+
       <ScrollView style={styles.container}>
         <View style={styles.container}>
-          <Header title={'DoctorApp'} icon={require('../Images/logo.png')} />
+          {/* Welcome Text */}
+          <View style={styles.welcomeContainer}>
+            <Text style={styles.welcomeText}>Welcome Gouranga</Text>
+            <Text style={styles.greetingText}>{greeting}</Text>
+          </View>
+
           <SearchBar
             placeholder="Search by doctor name"
             value={searchText}
@@ -44,7 +55,6 @@ const Dashboard = ({navigation}) => {
               ]}
               autoPlay={true}
               timer={3000}
-              // onItemChanged={item => console.log('item', item)}
               closeIconColor="#fff"
             />
           </View>
@@ -121,10 +131,18 @@ const Dashboard = ({navigation}) => {
 };
 
 export default Dashboard;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  fixedHeader: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1, // Ensures header stays on top of other content
   },
   banner: {
     width: '100%',
@@ -132,6 +150,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
     marginTop: 10,
+  },
+  welcomeContainer: {
+    paddingHorizontal: 15,
+    marginTop: 10,
+  },
+  welcomeText: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#4A90E2',
+  },
+  greetingText: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#888',
+    marginTop: 4,
+    marginBottom: 5,
   },
   heading: {
     color: '#000',
@@ -155,7 +189,6 @@ const styles = StyleSheet.create({
   },
   docItem: {
     width: '45%',
-
     backgroundColor: '#fff',
     borderRadius: 10,
     borderWidth: 0.2,

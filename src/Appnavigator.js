@@ -18,6 +18,9 @@ import Toast from 'react-native-toast-message';
 import ViewAppointment from './screens/ViewAppointment';
 import Profile from './screens/Profile';
 import AllAppointments from './screens/AllAppointments';
+import PendingBookings from './screens/PendingBookings';
+import Notofication from './screens/Notofication';
+import Header from './components/Header';
 const Stack = createStackNavigator();
 const Appnavigator = () => {
   return (
@@ -89,6 +92,22 @@ const Appnavigator = () => {
             component={AllAppointments}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="PendingBookings"
+            component={PendingBookings}
+            options={{headerShown: false}}
+          />
+
+          <Stack.Screen
+            name="Notofication"
+            component={Notofication}
+            options={{headerShown: false}}
+          />
+          {/* <Stack.Screen
+            name="Header"
+            component={Header}
+            options={{headerShown: false}}
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
       <Toast />

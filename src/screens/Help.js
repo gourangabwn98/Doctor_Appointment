@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import Header from '../components/Header';
 import CommonBtn from '../components/CommonBtn';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Help = () => {
   const handleCall = number => {
@@ -26,64 +27,66 @@ const Help = () => {
       <Header icon={require('../Images/back.png')} title={'Help & Support'} />
 
       {/* Main Content */}
-      <View style={styles.content}>
-        {/* Call Ambulance Section */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Call an Ambulance</Text>
-          <Text style={styles.cardSubtitle}>
-            For emergencies, call the ambulance helpline.
-          </Text>
-          <TouchableOpacity
-            style={styles.callButton}
-            onPress={() => handleCall('+911123456789')}>
-            <Text style={styles.callButtonText}>Call Ambulance</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Book Doctor via Helpline */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Book a Doctor via Helpline</Text>
-          <Text style={styles.cardSubtitle}>
-            Call our helpline to book a doctor instantly.
-          </Text>
-          <TouchableOpacity
-            style={styles.callButton}
-            onPress={() => handleCall('+912233445566')}>
-            <Text style={styles.callButtonText}>Call Doctor Helpline</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Report Problem Section */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Report a Problem</Text>
-          <Text style={styles.cardSubtitle}>
-            Call or send us a message to report any issues.
-          </Text>
-          <View style={styles.actionButtons}>
+      <ScrollView>
+        <View style={styles.content}>
+          {/* Call Ambulance Section */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Call an Ambulance</Text>
+            <Text style={styles.cardSubtitle}>
+              For emergencies, call the ambulance helpline.
+            </Text>
             <TouchableOpacity
               style={styles.callButton}
-              onPress={() => handleCall('+918899776655')}>
-              <Text style={styles.callButtonText}>Call Now</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.messageButton}
-              onPress={() => handleSMS('+918899776655')}>
-              <Text style={styles.messageButtonText}>Send Message</Text>
+              onPress={() => handleCall('+911123456789')}>
+              <Text style={styles.callButtonText}>Call Ambulance</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </View>
 
-      {/* Footer Section */}
-      <View style={styles.footer}>
-        <Image
-          source={require('../Images/support.png')} // Add a suitable image for support
-          style={styles.footerImage}
-        />
-        <Text style={styles.footerText}>
-          Need immediate assistance? Contact our 24/7 support line for help.
-        </Text>
-      </View>
+          {/* Book Doctor via Helpline */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Book a Doctor via Helpline</Text>
+            <Text style={styles.cardSubtitle}>
+              Call our helpline to book a doctor instantly.
+            </Text>
+            <TouchableOpacity
+              style={styles.callButton}
+              onPress={() => handleCall('+912233445566')}>
+              <Text style={styles.callButtonText}>Call Doctor Helpline</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Report Problem Section */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Report a Problem</Text>
+            <Text style={styles.cardSubtitle}>
+              Call or send us a message to report any issues.
+            </Text>
+            <View style={styles.actionButtons}>
+              <TouchableOpacity
+                style={styles.callButton}
+                onPress={() => handleCall('+918899776655')}>
+                <Text style={styles.callButtonText}>Call Now</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.messageButton}
+                onPress={() => handleSMS('+918899776655')}>
+                <Text style={styles.messageButtonText}>Send Message</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        {/* Footer Section */}
+        <View style={styles.footer}>
+          <Image
+            source={require('../Images/support.png')} // Add a suitable image for support
+            style={styles.footerImage}
+          />
+          <Text style={styles.footerText}>
+            Need immediate assistance? Contact our 24/7 support line for help.
+          </Text>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
   },
   content: {
-    marginTop: 20,
+    marginTop: 8,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

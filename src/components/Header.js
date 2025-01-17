@@ -7,10 +7,12 @@ import {
   Image,
   Modal,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {colors} from '../constants/colors';
-import {Ionicons} from 'react-native-vector-icons'; // Using Ionicons for the logout icon
 
 const Header = ({title, icon, onLoginPress, onRegisterPress}) => {
+  const navigation = useNavigation();
+
   const [isSliderVisible, setSliderVisible] = useState(false);
 
   const toggleSlider = () => {
@@ -31,7 +33,11 @@ const Header = ({title, icon, onLoginPress, onRegisterPress}) => {
       <Text style={[styles.title, {marginLeft: 10}]}>{title}</Text>
 
       {/* Right Section */}
-      <TouchableOpacity style={styles.notification} onPress={toggleSlider}>
+      <TouchableOpacity
+        style={styles.notification}
+        onPress={() => navigation.navigate('Notofication')}>
+        {' '}
+        {/* Use navigation here */}
         <Image
           source={require('../Images/notification.png')}
           style={styles.noti}
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: '#F8F8FF',
     elevation: 5,
     alignItems: 'center',
     paddingHorizontal: 20,
@@ -93,14 +99,11 @@ const styles = StyleSheet.create({
     height: 29,
     backgroundColor: colors.PrimaryColor,
     borderRadius: 20,
-    // padding: 5,
   },
   noti: {
     width: 29,
     height: 29,
-    // backgroundColor: colors.PrimaryColor,
     borderRadius: 20,
-    // padding: 5,
   },
   backBtn: {
     width: 30,
@@ -133,8 +136,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: '7%',
     backgroundColor: '#fff',
-    // padding: 20,
-    // justifyContent: 'flex-start',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
@@ -142,7 +143,6 @@ const styles = StyleSheet.create({
   logoutBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    // marginBottom: 20,
   },
   logoutText: {
     fontSize: 16,

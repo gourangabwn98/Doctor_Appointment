@@ -21,6 +21,11 @@ const AllAppointments = ({navigation}) => {
       item.doctorName.toLowerCase().includes(searchText.toLowerCase()),
   );
 
+  const handelClick = item => {
+    item.status !== 'Pending'
+      ? navigation.navigate('ViewAppointment', {appointment: item})
+      : navigation.navigate('PendingBookings', {appointment: item});
+  };
   return (
     <View style={styles.container}>
       <Header icon={require('../Images/back.png')} title="All Appointments" />
@@ -56,8 +61,9 @@ const AllAppointments = ({navigation}) => {
         renderItem={({item}) => (
           <TouchableOpacity
             style={styles.itemContainer}
-            onPress={() =>
-              navigation.navigate('ViewAppointment', {appointment: item})
+            onPress={
+              () => handelClick(item)
+              // navigation.navigate('ViewAppointment', {appointment: item})
             }>
             {/* Doctor's Image */}
             <Image
