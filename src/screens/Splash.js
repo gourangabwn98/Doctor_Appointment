@@ -20,9 +20,14 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useEffect} from 'react';
 
 const Splash = ({navigation}) => {
+  let login = true;
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('RootNavigation');
+      login
+        ? navigation.navigate('RootNavigation')
+        : navigation.navigate('Login');
+
+      //
     }, 3000);
   }, []);
   return (
@@ -39,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: '#4A90E2',
   },
   logo: {
     width: 100,

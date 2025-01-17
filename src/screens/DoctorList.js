@@ -10,6 +10,7 @@ import {
 import {doctors} from './doctordata';
 import {TextInput} from 'react-native-paper';
 import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
 
 const DoctorList = ({route, navigation}) => {
   const {categoryName} = route?.params;
@@ -23,11 +24,11 @@ const DoctorList = ({route, navigation}) => {
   return (
     <>
       <Header icon={require('../Images/back.png')} title={categoryName} />
-      <TextInput
+
+      <SearchBar
         placeholder="Search Doctor"
         value={name}
         onChangeText={t => setName(t)}
-        style={styles.input}
       />
 
       <ScrollView>
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: 'green',
+    backgroundColor: '#F0F8FF',
   },
   details: {
     marginLeft: 10,

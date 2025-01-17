@@ -7,27 +7,47 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 // import LinearGradient from 'react-native-linear-gradient';
 import CommonBtn from '../components/CommonBtn';
 import Header from '../components/Header';
 import LinearGradient from 'react-native-linear-gradient';
-import AutoSlider from '../components/AutoSlider';
+import {ImageSlider} from '@pembajak/react-native-image-slider-banner';
+import SearchBar from '../components/SearchBar';
 
 const Dashboard = ({navigation}) => {
+  const [searchText, setSearchText] = useState('');
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
         <View style={styles.container}>
           <Header title={'DoctorApp'} icon={require('../Images/logo.png')} />
-          <Image
-            source={require('../Images/banner.jpg')}
-            style={styles.banner}
+          <SearchBar
+            placeholder="Search by doctor name"
+            value={searchText}
+            onChangeText={setSearchText}
           />
-          {/* <View style={{flex: 1}}>
-            <AutoSlider />
-          </View> */}
+
+          <View style={{flex: 1}}>
+            <ImageSlider
+              data={[
+                {
+                  img: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/health-care-medical-center-promo-banner-design-template-c2de622d5dde1754e02ee81f16afc9b0_screen.jpg?ts=1709488933',
+                },
+                {
+                  img: 'https://media.bizj.us/view/img/10072241/banner-health-center-rendering*900xx1168-656-0-0.jpg',
+                },
+                {
+                  img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAO1moyvjYmpF31EJKixnNgXlCumbpV8V9Fw&s',
+                },
+              ]}
+              autoPlay={true}
+              timer={3000}
+              // onItemChanged={item => console.log('item', item)}
+              closeIconColor="#fff"
+            />
+          </View>
 
           <Text style={styles.heading}>Select Category</Text>
           <View style={{marginTop: 20}}>
@@ -44,7 +64,7 @@ const Dashboard = ({navigation}) => {
                       });
                     }}>
                     <LinearGradient
-                      colors={['#009FFD', '#2A2A72']}
+                      colors={['#4A90E2', '#4A90E2']}
                       style={styles.linearGradient}>
                       <Text style={styles.catName}>{'Category ' + index}</Text>
                     </LinearGradient>
@@ -72,19 +92,19 @@ const Dashboard = ({navigation}) => {
                       style={[
                         styles.status,
                         {
-                          color: index / 2 == 0 ? 'green' : 'red',
-                          opacity: index / 2 == 0 ? 1 : 0.5,
+                          color: index % 2 == 0 ? 'green' : 'red',
+                          opacity: index % 2 == 0 ? 1 : 0.5,
                         },
                       ]}>
-                      {index / 2 == 0 ? 'Available' : 'Busy'}
+                      {index % 2 == 0 ? 'Available' : 'Busy'}
                     </Text>
                     <CommonBtn
                       w={150}
                       h={40}
-                      status={index / 2 == 0 ? true : false}
+                      status={index % 2 == 0 ? true : false}
                       txt={'Book Appointment'}
                       onClick={() => {
-                        if (index / 2 == 0) {
+                        if (index % 2 == 0) {
                           navigation.navigate('BookAppointment');
                         }
                       }}

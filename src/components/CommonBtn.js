@@ -1,6 +1,7 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import {colors} from '../constants/colors';
 
 const CommonBtn = ({w, h, txt, onClick, status}) => {
   return (
@@ -11,7 +12,7 @@ const CommonBtn = ({w, h, txt, onClick, status}) => {
       style={{alignSelf: 'center', marginTop: 10, marginBottom: 10}}>
       {status ? (
         <LinearGradient
-          colors={['#009FFD', '#2A2A72']}
+          colors={['#4A90E2', '#4A90E2']}
           style={{
             width: w,
             height: h,

@@ -3,8 +3,9 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Dashboard from '../screens/Dashboard';
 import Help from '../screens/Help';
-import Pending from '../screens/Pending';
+
 import Profile from '../screens/Profile';
+import AllAppointments from '../screens/AllAppointments';
 const Bottom = createBottomTabNavigator();
 const BottomNavigator = () => {
   return (
@@ -29,14 +30,33 @@ const BottomNavigator = () => {
         }}
       />
       <Bottom.Screen
-        name="Pending"
-        component={Pending}
+        name="All Appointments"
+        component={AllAppointments}
         options={{
           headerShown: false,
           tabBarIcon: tabInfo => {
             return (
               <Image
                 source={require('../Images/visited.jpg')}
+                style={{
+                  width: 40,
+                  height: 40,
+                  tinColor: tabInfo.focuesd ? 'purple' : 'black',
+                }}
+              />
+            );
+          },
+        }}
+      />
+      <Bottom.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarIcon: tabInfo => {
+            return (
+              <Image
+                source={require('../Images/userProfile.png')}
                 style={{
                   width: 40,
                   height: 40,
@@ -56,25 +76,6 @@ const BottomNavigator = () => {
             return (
               <Image
                 source={require('../Images/ambulance.png')}
-                style={{
-                  width: 40,
-                  height: 40,
-                  tinColor: tabInfo.focuesd ? 'purple' : 'black',
-                }}
-              />
-            );
-          },
-        }}
-      />
-      <Bottom.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false,
-          tabBarIcon: tabInfo => {
-            return (
-              <Image
-                source={require('../Images/doctor.png')}
                 style={{
                   width: 40,
                   height: 40,

@@ -1,7 +1,27 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from 'react-native';
+import {colors} from '../constants/colors';
+import {Ionicons} from 'react-native-vector-icons'; // Using Ionicons for the logout icon
 
-const Header = ({title, icon}) => {
+const Header = ({title, icon, onLoginPress, onRegisterPress}) => {
+  const [isSliderVisible, setSliderVisible] = useState(false);
+
+  const toggleSlider = () => {
+    setSliderVisible(!isSliderVisible);
+  };
+
+  const handleLogout = () => {
+    console.log('User logged out');
+    setSliderVisible(false);
+  };
+
   return (
     <View style={styles.header}>
       <TouchableOpacity style={styles.backBtn} underlayColor="#ffffff00">
@@ -9,10 +29,46 @@ const Header = ({title, icon}) => {
       </TouchableOpacity>
 
       <Text style={[styles.title, {marginLeft: 10}]}>{title}</Text>
+
+      {/* Right Section */}
+      <TouchableOpacity style={styles.notification} onPress={toggleSlider}>
+        <Image
+          source={require('../Images/notification.png')}
+          style={styles.noti}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.rightSection} onPress={toggleSlider}>
+        <Image
+          source={require('../Images/userProfile.png')}
+          style={styles.profile}
+        />
+      </TouchableOpacity>
+
+      {/* Slider Menu */}
+      {isSliderVisible && (
+        <Modal
+          transparent={true}
+          visible={isSliderVisible}
+          animationIn="fadeIn"
+          animationOut="fadeOut">
+          <View style={styles.sliderContainer}>
+            <View style={styles.slider}>
+              <TouchableOpacity onPress={handleLogout} style={styles.logoutBtn}>
+                <Image
+                  source={require('../Images/logout.png')}
+                  style={styles.logout}
+                />
+                <Text style={styles.logoutText}>Logout</Text>
+              </TouchableOpacity>
+              {/* You can add more options like Profile, Settings, etc. */}
+            </View>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 };
-export default Header;
+
 const styles = StyleSheet.create({
   header: {
     height: 60,
@@ -21,19 +77,78 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     elevation: 5,
     alignItems: 'center',
-    paddingLeft: 20,
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
   },
   back: {
     width: 24,
     height: 24,
   },
+  logout: {
+    width: 28,
+    height: 24,
+  },
+  profile: {
+    width: 29,
+    height: 29,
+    backgroundColor: colors.PrimaryColor,
+    borderRadius: 20,
+    // padding: 5,
+  },
+  noti: {
+    width: 29,
+    height: 29,
+    // backgroundColor: colors.PrimaryColor,
+    borderRadius: 20,
+    // padding: 5,
+  },
   backBtn: {
     width: 30,
     height: 30,
     borderRadius: 15,
+    color: colors.PrimaryColor,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
+    flex: 1,
+    color: colors.PrimaryColor,
+  },
+  rightSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  notification: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  sliderContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  slider: {
+    width: 150,
+    height: '7%',
+    backgroundColor: '#fff',
+    // padding: 20,
+    // justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
+  logoutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // marginBottom: 20,
+  },
+  logoutText: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 10,
   },
 });
+
+export default Header;
